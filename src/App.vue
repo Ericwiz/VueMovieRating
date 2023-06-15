@@ -1,9 +1,13 @@
 <script setup>
+import AppNavbar from './components/AppNavbar.vue'
 </script>
 
 <template>
-  <main>
-    <h1 class="text-3xl font-bold text-center underline">Hello World Vue.js</h1>
+  <header>
+    <AppNavbar />
+  </header>
+  <main class="w-full overflow-x-hidden">
+    <RouterView />
   </main>
 </template>
 

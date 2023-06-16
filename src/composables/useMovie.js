@@ -14,7 +14,6 @@ export default function useMovie() {
     return axios.get('https://www.omdbapi.com/', {params})
       .then(response => {
         const movieList = response.data.Search
-        console.log("Search", response.data.Search)
 
       // The omdbapi search (s) param does not return the full detail for a movie, so I need
       // to query the api again with the omdbd ID of each movie to return the movie's full details

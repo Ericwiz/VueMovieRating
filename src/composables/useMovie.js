@@ -11,7 +11,7 @@ export default function useMovie() {
       s: searchTerm,
       y: year,
     };
-    return axios.get('http://www.omdbapi.com/', {params})
+    return axios.get('https://www.omdbapi.com/', {params})
       .then(response => {
         const movieList = response.data.Search
         console.log("Search", response.data.Search)
@@ -20,7 +20,7 @@ export default function useMovie() {
       // to query the api again with the omdbd ID of each movie to return the movie's full details
 
         const fullMovieDetail = movieList.map((movie) => 
-        axios.get('http://www.omdbapi.com/', {
+        axios.get('https://www.omdbapi.com/', {
           params: {
             apikey,
             i: movie.imdbID

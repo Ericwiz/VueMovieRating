@@ -1,24 +1,20 @@
 <script setup>
 import { Icon } from "@iconify/vue";
-import { onMounted, ref } from "vue";
-import axios from 'axios'
-const apikey = (import.meta.env.VITE_API_KEY)
+
+import { onBeforeMount, ref } from "vue";
+
+import useMovie from "../../../composables/useMovie";
+
+const { getFilmTypes } = useMovie()
 
 const movies = ref([])
 
-onMounted(() => {
-    axios.get('http://www.omdbapi.com/', {
-        params: {
-            apikey,
-            s: 'sweet',
-            t: 'series'
-        }
-    }).then(response => {
-        movies.value = response.data.Search
-    }).catch (err => {
-        alert(err)
-    })
+onBeforeMount(() => {
+    getFilmTypes('sweet', 'series')
+        .then(response => movies.value = response)
+        .catch (err => alert(err))
 })
+
 </script>
 <template>
     <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-white">

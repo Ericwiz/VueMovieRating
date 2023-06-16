@@ -10,9 +10,13 @@ const { movies, fetchMovies } = useMovie()
 // const { fetchMovies } = store
 
 onMounted(() => {
-    fetchMovies(2023, 'love', 1)
-
-    console.log("Tired Movie", fetchMovies(2023, 'love', 2))
+    fetchMovies('crime', 2023)
+        .then(response => {
+            //grab all the movies returned by the API when all promise resolves and assign it to the movies variable
+            const originalMovies = response.map(movies => movies.data)
+            movies.value = originalMovies
+            return movies.value
+        }) 
 })
 
 const sampleMovies = computed(() => {
@@ -22,7 +26,7 @@ const sampleMovies = computed(() => {
 </script>
 
 <template>
-    <div class="w-full bg-movie_bg-02 h-fit bg-cover bg-center bg-pink-950 bg-blend-multiply px-4 md:8 lg:px-16 py-16">
+    <div class="w-full bg-movie_bg-02 h-fit bg-cover bg-center bg-pink-950 bg-blend-multiply px-4 sm:px-8 md:px-16 py-16">
         <h1 class="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl py-12">
             <span class="font-bold">Welcome</span>
              to Vue

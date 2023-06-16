@@ -1,13 +1,11 @@
 <script setup>
-// import { storeToRefs } from "pinia"
 import { computed, onMounted } from "vue"
-// import {useMovieStore}  from '../../stores/movie'
+
 import useMovie  from "../../composables/useMovie";
+
 import { Icon } from '@iconify/vue';
 
-
 const { movies, fetchMovies } = useMovie()
-// const { fetchMovies } = store
 
 onMounted(() => {
     fetchMovies('crime', 2023)

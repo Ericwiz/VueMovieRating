@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'movie_bg-01': "url('./src/assets/movie_bg-01.webp')",
-        'movie_bg-02': "url('./src/assets/movie_bg-02.webp')"
+        'movie_bg-01': "url('@/assets/movie_bg-01.webp')",
+        'movie_bg-02': "url('@/assets/movie_bg-02.webp')"
       }, 
       screens: {
         'xs': '475px'

@@ -1,10 +1,10 @@
 <script setup>
-import AppNavbar from './components/AppNavbar.vue'
+import TheNavigation from './components/TheNavigation.vue'
 </script>
 
 <template>
   <header>
-    <AppNavbar />
+    <TheNavigation />
   </header>
   <main class="w-full overflow-x-hidden">
     <RouterView />

@@ -1,4 +1,5 @@
-import { ref } from 'vue'
+// eslint-disable-next-line no-unused-vars
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 const apikey = (import.meta.env.VITE_API_KEY)

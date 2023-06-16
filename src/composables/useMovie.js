@@ -7,7 +7,7 @@ export default function useMovie() {
   // retrieve the movies from the Api
    function fetchMovies(searchTerm, year, ) {
     const params = {
-      apikey,
+      apikey: apikey,
       s: searchTerm,
       y: year,
     };
@@ -22,7 +22,7 @@ export default function useMovie() {
         const fullMovieDetail = movieList.map((movie) => 
         axios.get('https://www.omdbapi.com/', {
           params: {
-            apikey,
+            apikey:apikey,
             i: movie.imdbID
           }
         })

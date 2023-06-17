@@ -38,7 +38,7 @@ export default function useMovie() {
       t: movieType,
     };
   
-    return axios.get('http://www.omdbapi.com/', { params })
+    return axios.get('https://www.omdbapi.com/', { params })
       .then(response => response.data.Search)
       .catch(err => {
         alert(err);

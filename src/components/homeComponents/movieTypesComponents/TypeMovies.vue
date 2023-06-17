@@ -17,14 +17,14 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-white">
+    <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-12 xl:gap-16 text-white">
         <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">
-        <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72">
+        <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
             <div class="flex flex-col space-y-2">
-                <h1>{{ movie.Title }}</h1>
+                <h1 class="text 2xl:text-3xl">{{ movie.Title }}</h1>
             <div class="flex space-x-2">
-                <Icon icon="iwwa:year" height="24" width="24" class="flex text-gray-400"/>
-                <span class="text-white font-bold">{{ movie.Year }}</span>
+                <Icon icon="iwwa:year"  class="flex text-gray-400 h-6 w-6 2xl:h-10 2xl:w-10"/>
+                <span class="text-white font-bold 2xl:text-3xl">{{ movie.Year }}</span>
             </div>
             </div>
         </div>

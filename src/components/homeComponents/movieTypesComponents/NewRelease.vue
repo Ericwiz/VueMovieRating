@@ -21,17 +21,17 @@ const latestMovies = computed(() => {
 </script>
 
 <template>
-    <div class="grid gap-8 grid-cols-1  xs:grid-cols-2 text-white">
+    <div class="grid gap-8 grid-cols-1  xs:grid-cols-2 text-white 2xl:gap-16">
         <div v-for="movie in latestMovies" :key="movie.imdbID" class="flex flex-col lg:flex-row space-y-3 md:space-x-6">
-        <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 lg:w-60">
-            <div class="flex flex-col space-y-2">
-                <h1>{{ movie.Title }}</h1>
-                <p class="text-small font-normal text-pink-600">{{ movie.Genre }}</p>
+        <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 lg:w-60 2xl:w-2/4 2xl:h-full">
+            <div class="flex flex-col space-y-2 2xl:space-y-4">
+                <h1 class="2xl:text-4xl">{{ movie.Title }}</h1>
+                <p class="text-small font-normal text-pink-600 2xl:text-3xl">{{ movie.Genre }}</p>
                 <div class="flex space-x-2">
-                    <Icon icon="material-symbols:star" height="24" width="24" class="flex text-pink-600"/>
-                    <span class="text-white font-bold">{{ movie.imdbRating }}</span>
+                    <Icon icon="material-symbols:star" class="flex text-pink-600 h-6 2xl:h-10 w-6 2xl:w-10"/>
+                    <span class="text-white font-bold 2xl:text-3xl">{{ movie.imdbRating }}</span>
                 </div>
-                <p class="text-[0.8rem] lg:text-[0.9rem] hidden lg:block text-gray-300">{{ movie.Plot }}</p>
+                <p class="text-[0.8rem] lg:text-[0.9rem] hidden lg:block text-gray-300 2xl:text-2xl">{{ movie.Plot }}</p>
             </div>
         </div>
     </div>

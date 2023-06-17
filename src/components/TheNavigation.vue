@@ -8,13 +8,13 @@ const showMobileMenu = ref(true)
 <template>
     <nav class="bg-[#191517] drop-shadow-xl fixed w-full">
         <!-- Desktop -->
-        <div class="flex justify-between text-white py-3 px-4 sm:px-8 md:px-16">
+        <div class="flex justify-between text-white py-6 px-4 sm:px-8 md:px-16">
             <!-- Primary nav -->
             <div class="flex justify-between gap-12 lg:gap-20">
-                <h1 class="text-lg xs:text-2xl lg:text-3xl">Vue <span class="text-pink-700 -ml-2">Movies</span></h1>
+                <h1 class="text-lg xs:text-2xl lg:text-3xl 2xl:text-6xl">Vue <span class="text-pink-700 -ml-2">Movies</span></h1>
                 <div class="hidden md:flex space-x-10 text-lg">
-                    <RouterLink to="/" class="">Home</RouterLink>
-                    <RouterLink to="/catalog">Catalog</RouterLink>
+                    <RouterLink to="/" class="2xl:text-4xl">Home</RouterLink>
+                    <RouterLink to="/catalog" class="2xl:text-4xl">Catalog</RouterLink>
                 </div>
             </div>
 

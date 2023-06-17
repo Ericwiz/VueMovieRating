@@ -19,7 +19,7 @@ onBeforeMount(() => {
 <template>
     <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-white">
         <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">
-        <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-72 xs:w-72">
+        <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72">
             <div class="flex flex-col space-y-2">
                 <h1>{{ movie.Title }}</h1>
             <div class="flex space-x-2">

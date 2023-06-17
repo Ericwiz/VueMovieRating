@@ -28,7 +28,6 @@ const components = {
         </div>
 
         <div class="px-4 sm:px-8 md:px-16 py-14">
-
             <transition name="translate" mode="out-in">
                 <KeepAlive>
                     <component :is="components[activeComponent]"></component>

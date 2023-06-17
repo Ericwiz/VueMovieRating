@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { RouterLink } from "vue-router";
 
 const showMobileMenu = ref(true)
 </script>
@@ -12,8 +13,8 @@ const showMobileMenu = ref(true)
             <div class="flex justify-between gap-12 lg:gap-20">
                 <h1 class="text-lg xs:text-2xl lg:text-3xl">Vue <span class="text-pink-700 -ml-2">Movies</span></h1>
                 <div class="hidden md:flex space-x-10 text-lg">
-                    <a href="#" class="">Home</a>
-                    <a href="#">Catalog</a>
+                    <RouterLink to="/" class="">Home</RouterLink>
+                    <RouterLink to="/catalog">Catalog</RouterLink>
                 </div>
             </div>
 

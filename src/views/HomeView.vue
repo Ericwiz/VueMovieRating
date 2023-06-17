@@ -5,7 +5,10 @@ import FilmGallary from '../components/homeComponents/FilmGallary.vue';
 
 <template>
     <div>
-        <TheWelcome />
+        <KeepAlive>
+            <TheWelcome />
+        </KeepAlive>
         <FilmGallary />
     </div>
 </template>
+

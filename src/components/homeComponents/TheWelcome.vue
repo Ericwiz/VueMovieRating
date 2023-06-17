@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from "vue"
+import { computed, onBeforeMount } from "vue"
 
 import useMovie  from "../../composables/useMovie";
 
@@ -7,7 +7,7 @@ import { Icon } from '@iconify/vue';
 
 const { movies, fetchMovies } = useMovie()
 
-onMounted(() => {
+onBeforeMount(() => {
     fetchMovies('crime', 2023)
         .then(response => {
             //grab all the movies returned by the API when all promise resolves and assign it to the movies variable

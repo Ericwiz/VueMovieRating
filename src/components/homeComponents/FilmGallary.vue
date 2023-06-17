@@ -18,7 +18,7 @@ const components = {
         <div class="bg-[#0f1010] px-4 sm:px-8 md:px-16 shadow-lg shadow-black">
             <h1 class="uppercase text-white text-lg xs:text-2xl md:text-3xl lg:text-4xl py-8">film gallary</h1>
             <div class="flex justify-start space-x-2 xs:space-x-5">
-                <button class="text-white text-xs sm:text-lg xs:uppercase focus:border-b-2 focus:border-b-pink-600 pb-3 transition-all duration-500 ease-in" 
+                <button class="text-white text-xs sm:text-lg uppercase focus:border-b-2 focus:border-b-pink-600 pb-3 transition-all duration-500 ease-in" 
                 v-for="(_, component) in components" :key="component" 
                 @click="activeComponent = component"
                 >

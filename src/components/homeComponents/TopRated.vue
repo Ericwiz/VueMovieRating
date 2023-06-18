@@ -21,10 +21,8 @@ onMounted(() => {
 <template>
     <div class="bg-[#110e0f] px-4 sm:px-8 md:px-16 py-10">
         <h1 class="text-2xl xs:text-3xl text-white pt-5 pb-10 2xl:text-6xl">Top Rated Movies</h1>
-        {{ console.log(movies) }}
         <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-20 text-white">
             <template v-for="movie in movies" :key="movie.imdbID">
-                {{ console.log(movie) }}
                <div class="flex flex-col space-y-3" v-if="movie.imdbRating > 6">
                     <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
                     <div class="flex flex-col space-y-2">

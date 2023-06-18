@@ -6,7 +6,7 @@ const showMobileMenu = ref(true)
 </script>
 
 <template>
-    <nav class="bg-[#191517] drop-shadow-xl fixed w-full">
+    <nav class="bg-[#191517] z-50 drop-shadow-2xl fixed w-full">
         <!-- Desktop -->
         <div class="flex justify-between text-white py-6 px-4 sm:px-8 md:px-16">
             <!-- Primary nav -->
@@ -73,8 +73,8 @@ const showMobileMenu = ref(true)
         <!-- Mobile Menu -->
         <div class="md:hidden z-50 bg-[#191517] px-8 pt-4 w-full sm:w-4/6 h-screen text-white absolute" :class="[showMobileMenu ? '-right-[100%]' : 'right-0', 'transition-all duration-500']">
             <div class="flex space-x-10 text-lg text-white">
-                <a href="#" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</a>
-                <a href="#" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</a>
+                <RouterLink to="/" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</RouterLink>
+                <RouterLink to="/catalog" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</RouterLink>
             </div>
             <form class="flex space-x-3 pt-10">
                 <div class="">

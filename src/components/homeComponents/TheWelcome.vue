@@ -1,11 +1,13 @@
 <script setup>
-import { computed, onBeforeMount } from "vue"
+import { computed, onBeforeMount, ref } from "vue"
 
 import useMovie  from "../../composables/useMovie";
 
 import { Icon } from '@iconify/vue';
 
-const { movies, fetchMovies } = useMovie()
+const { fetchMovies } = useMovie()
+
+let movies = ref(null)
 
 onBeforeMount(() => {
     fetchMovies('crime', 2023)
@@ -13,7 +15,7 @@ onBeforeMount(() => {
             //grab all the movies returned by the API when all promise resolves and assign it to the movies variable
             const originalMovies = response.map(movies => movies.data)
             movies.value = originalMovies
-            return movies.value
+            return movies
         }) 
 })
 
@@ -31,7 +33,7 @@ const sampleMovies = computed(() => {
             <span class="text-pink-700 -ml-1 md:-ml-2.5">Movies</span>
         </h1>
 
-       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-14 cursor-pointer items-center">
+       <div v-if="movies" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-14 cursor-pointer items-center">
             <div v-for="(movie, index) in sampleMovies" :key="movie.imdbID" :class="{'hidden lg:block': index > 1, 'hidden sm:block': index === 1 }" class="justify-self-center xs:justify-self-auto">
                 <img :src="movie.Poster" alt="movie poster" class="h-fit w-fit xs:w-full sm:h-96 w-84 rounded-sm 2xl:h-full">
                 <div class="py-3">
@@ -44,5 +46,13 @@ const sampleMovies = computed(() => {
                 </div>
             </div>
        </div>
+
+       <div v-else class="text-white">
+            <span class="loading loading-ball loading-xs"></span>
+            <span class="loading loading-ball loading-sm"></span>
+            <span class="loading loading-ball loading-md"></span>
+            <span class="loading loading-ball loading-lg"></span>
+            <span class="loading loading-ball loading-lg"></span>
+        </div>
     </div>
 </template>

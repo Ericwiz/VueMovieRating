@@ -11,7 +11,7 @@ const movies = ref([])
 
 onBeforeMount(() => {
     getFilmTypes('souls', 'episode')
-        .then(response => movies.value = response)
+        .then(response => movies.value = response.Search)
         .catch (err => alert(err))
 })
 </script>

@@ -5,7 +5,7 @@ const apikey = (import.meta.env.VITE_API_KEY)
 export default function useMovie() {
     const movies = ref([])
   // retrieve the movies from the Api
-   function fetchMovies(searchTerm, year, page = 1 ) {
+   function fetchMovies(searchTerm = 'love', year, page = 1 ) {
     const params = {
       apikey: apikey,
       s: searchTerm,

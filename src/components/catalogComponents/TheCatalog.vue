@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 
+import SearchBar from './SearchBar.vue'
+
 import { Icon } from "@iconify/vue";
 
 import useMovie from "../../composables/useMovie";
@@ -9,10 +11,14 @@ const { fetchMovies} = useMovie();
 
 const page = ref(1)
 
+const year = ref('')
+
+const title = ref('love')
+
 let movies = ref(null)
 
 function getMovies() {
-    return fetchMovies('love', '', page.value)
+    return fetchMovies(title.value, year.value, page.value)
         .then(res => {
             console.log('res', res)
             const originalMovies = res.map(movies => movies.data)
@@ -28,6 +34,11 @@ onMounted(() => {
 watch(page, () => {
     getMovies() 
 })
+
+function search() {
+    getMovies()
+    
+}
 </script>
 
 <template>
@@ -37,7 +48,10 @@ watch(page, () => {
         </div>
 
         <div class="py-8 px-4 sm:px-8 md:px-16 bg-[#191517] drop-shadow-2xl">
-            hello vue movie
+            <SearchBar 
+            v-model:title="title" 
+            v-model:year="year" 
+            @search="search"/>
         </div>
         <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8">
             <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">

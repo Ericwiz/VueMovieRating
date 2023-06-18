@@ -3,6 +3,8 @@ import { onMounted, ref, watch } from "vue";
 
 import SearchBar from './SearchBar.vue'
 
+import TheFilter from './TheFilter.vue'
+
 import { Icon } from "@iconify/vue";
 
 import useMovie from "../../composables/useMovie";
@@ -15,13 +17,16 @@ const year = ref('')
 
 const title = ref('love')
 
-let movies = ref(null)
+const genre = ref('All')
+
+const movies = ref(null)
+
+let originalMovies = []
 
 function getMovies() {
     return fetchMovies(title.value, year.value, page.value)
         .then(res => {
-            console.log('res', res)
-            const originalMovies = res.map(movies => movies.data)
+            originalMovies = res.map(movies => movies.data)
             movies.value = originalMovies
             return movies
         })
@@ -39,6 +44,28 @@ function search() {
     getMovies()
     
 }
+
+watch(genre, () => {
+  if (genre.value) {
+    if (genre.value === 'All') {
+      console.log('First Movies Value Here:',  movies.value);
+        movies.value = originalMovies ; // Reset movies.value to the original list
+    } else {
+         movies.value = originalMovies.filter(movie => {
+        if (movie.Genre) {
+          const movieGenres = movie.Genre.split(',').map(genre => genre.trim());
+          // console.log("Split", genre)
+          // console.log("movieGenres", movieGenres.includes(genre.value))
+          return movieGenres.includes(genre.value);
+        }
+        return false;
+      });
+    }
+    console.log('Filtered Movies:', movies.value);
+    return movies.value
+    // Use the filtered movies array as needed
+  }
+})
 </script>
 
 <template>
@@ -48,10 +75,14 @@ function search() {
         </div>
 
         <div class="py-8 px-4 sm:px-8 md:px-16 bg-[#191517] drop-shadow-2xl">
-            <SearchBar 
-            v-model:title="title" 
-            v-model:year="year" 
-            @search="search"/>
+           <div class="flex justify-between">
+                <SearchBar 
+                v-model:title="title" 
+                v-model:year="year" 
+                @search="search"/>
+
+                <TheFilter v-model:filterValue="genre"/>
+           </div>
         </div>
         <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8">
             <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">

@@ -18,7 +18,7 @@ onMounted(() => {
 <template>
     <div>
         <!-- <form @submit="me"> -->
-            <div class="flex space-x-4">
+            <div class="flex space-x-4 ">
                 <input 
                 class="input input-bordered w-full max-w-xs"
                 type="text" 

@@ -21,10 +21,10 @@ onBeforeMount(() => {
         <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">
         <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
             <div class="flex flex-col space-y-2">
-                <h1 class="text 2xl:text-3xl">{{ movie.Title }}</h1>
+                <h1 class="text 2xl:text-2xl">{{ movie.Title }}</h1>
             <div class="flex space-x-2">
-                <Icon icon="iwwa:year"  class="flex text-gray-400 h-6 w-6 2xl:h-10 2xl:w-10"/>
-                <span class="text-white font-bold 2xl:text-3xl">{{ movie.Year }}</span>
+                <Icon icon="iwwa:year"  class="flex text-gray-400 h-6 w-6 2xl:h-8 2xl:w-8"/>
+                <span class="text-white font-bold 2xl:text-2xl">{{ movie.Year }}</span>
             </div>
             </div>
         </div>

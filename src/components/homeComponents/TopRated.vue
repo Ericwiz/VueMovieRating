@@ -26,10 +26,10 @@ onMounted(() => {
                <div class="flex flex-col space-y-3" v-if="movie.imdbRating > 6">
                     <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
                     <div class="flex flex-col space-y-2">
-                        <h3 class="2xl:text-3xl">{{ movie.Title }}</h3>
+                        <h3 class="2xl:text-2xl">{{ movie.Title }}</h3>
                         <div class="flex space-x-2">
-                            <Icon icon="material-symbols:star" class="flex text-pink-600 h-6 2xl:h-10 w-6 2xl:w-10"/>
-                            <span class="text-white font-bold 2xl:text-3xl">{{ movie.imdbRating }}</span>
+                            <Icon icon="material-symbols:star" class="flex text-pink-600 h-6 2xl:h-8 w-6 2xl:w-8"/>
+                            <span class="text-white font-bold 2xl:text-2xl">{{ movie.imdbRating }}</span>
                         </div>
                     </div>
                </div>

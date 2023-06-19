@@ -25,7 +25,7 @@ const showMobileMenu = ref(true)
                         <Icon icon="iconamoon:search-fill" class="h-4 w-4 2xl:h-10 2xl:w-10"/>
                         <span class="">Search</span>
                     </RouterLink>
-                </div>
+            </div>
 
             <div class="md:hidden">
                 <button @click="showMobileMenu = !showMobileMenu">
@@ -42,14 +42,12 @@ const showMobileMenu = ref(true)
                 <RouterLink to="/" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</RouterLink>
                 <RouterLink to="/catalog" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</RouterLink>
             </div>
-            <form class="flex space-x-3 pt-10">
-                <div class="">
-                    <input type="text" required class="w-full h-full pl-3 rounded-md text-black focus:outline-none focus:outline-pink-700 caret-pink-700">
-                </div>
-                <button type="submit" class="bg-pink-700 rounded-md px-5 py-2">
-                    Search
-                </button>
-            </form>
+            <div class="block md:hidden pt-5">
+                    <RouterLink to="/catalog" class="flex items-center space-x-2 text-gray-400"> 
+                        <Icon icon="iconamoon:search-fill" class="h-4 w-4 2xl:h-10 2xl:w-10"/>
+                        <span class="">Search</span>
+                    </RouterLink>
+            </div>
         </div>
     </nav>
 </template>

@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import { Icon } from "@iconify/vue";
 
 const showMobileMenu = ref(true)
 </script>
@@ -20,46 +21,11 @@ const showMobileMenu = ref(true)
 
             <!-- Secondary Nav -->
             <div class="hidden md:block">
-                    <form class="flex space-x-3">
-                        <div class="">
-                            <input type="text" required class="w-52 h-full pl-3 rounded-md text-black focus:outline-none focus:outline-pink-700 caret-pink-700">
-                        </div>
-                        <button type="submit" class="bg-pink-700 rounded-md px-5 py-2">
-                            Search
-                        </button>
-                    </form>
+                    <RouterLink to="/catalog" class="flex items-center space-x-2 text-gray-400"> 
+                        <Icon icon="iconamoon:search-fill" class="h-4 w-4 2xl:h-10 2xl:w-10"/>
+                        <span class="">Search</span>
+                    </RouterLink>
                 </div>
-
-                <!-- <div class="hidden lg:flex justify-start space-y-8 md:space-y-0 md:space-x-14 text-lg text-white">
-                <select class="select text-black font-normal max-w-xs">
-                    <option disabled selected class="uppercase">Filter</option>
-                    <option>Homer</option>
-                    <option>Marge</option>
-                    <option>Bart</option>
-                    <option>Lisa</option>
-                    <option>Maggie</option>
-                </select> -->
-                <!-- <div>Sort</div> -->
-                <!-- <ul class="menu max-w-xs bg-base-100 rounded-box">
-                    <li class="text-black">
-                        <details close>
-                            <summary class="uppercase">Sort</summary>
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                    <span class="">Year</span> 
-                                    <input type="checkbox" class="checkbox checkbox-secondary" />
-                                </label>
-                            </div>
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                    <span class="">Rating</span> 
-                                    <input type="checkbox" class="checkbox checkbox-secondary" />
-                                </label>
-                            </div>
-                        </details>
-                    </li>
-                </ul>
-            </div> -->
 
             <div class="md:hidden">
                 <button @click="showMobileMenu = !showMobileMenu">
@@ -73,8 +39,8 @@ const showMobileMenu = ref(true)
         <!-- Mobile Menu -->
         <div class="md:hidden z-50 bg-[#191517] px-8 pt-4 w-full sm:w-4/6 h-screen text-white absolute" :class="[showMobileMenu ? '-right-[100%]' : 'right-0', 'transition-all duration-500']">
             <div class="flex space-x-10 text-lg text-white">
-                <RouterLink to="/" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</RouterLink>
-                <RouterLink to="/catalog" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</RouterLink>
+                <RouterLink to="/" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</RouterLink>
+                <RouterLink to="/catalog" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</RouterLink>
             </div>
             <form class="flex space-x-3 pt-10">
                 <div class="">
@@ -84,37 +50,12 @@ const showMobileMenu = ref(true)
                     Search
                 </button>
             </form>
-
-            <!-- <div class="flex flex-col md:flex-row justify-start space-y-8 md:space-y-0 md:space-x-14 py-16 text-lg text-white">
-                <select class="select text-black font-normal max-w-xs">
-                    <option disabled selected class="uppercase">Filter</option>
-                    <option>Homer</option>
-                    <option>Marge</option>
-                    <option>Bart</option>
-                    <option>Lisa</option>
-                    <option>Maggie</option>
-                </select> -->
-                <!-- <div>Sort</div> -->
-                <!-- <ul class="menu max-w-xs bg-base-100 rounded-box">
-                    <li class="text-black">
-                        <details close>
-                            <summary class="uppercase">Sort</summary>
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                    <span class="">Year</span> 
-                                    <input type="checkbox" class="checkbox checkbox-secondary" />
-                                </label>
-                            </div>
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                    <span class="">Rating</span> 
-                                    <input type="checkbox" class="checkbox checkbox-secondary" />
-                                </label>
-                            </div>
-                        </details>
-                    </li>
-                </ul>
-            </div> -->
         </div>
     </nav>
 </template>
+
+<style scoped>
+.active {
+    color: darkgray;
+}
+</style>

@@ -19,15 +19,9 @@ const year = ref('')
 
 const title = ref('love')
 
-const genre = ref('All')
+const genre = ref('')
 
-const sortByRating = ref(null)
-
-const sortByYear = ref(true)
-
-const sortByTitle = ref(null)
-
-const yes = ref(null)
+const sortValue = ref('')
 
 const movies = ref(null)
 
@@ -49,13 +43,15 @@ onMounted(() => {
 
 watch(page, () => {
     getMovies() 
+    genre.value = ''
+    sortValue.value = ''
 })
 
 function search() {
     getMovies()
     
 }
-// filter by genre 
+// filter movies by genre 
 watch(genre, () => {
   if (genre.value) {
     if (genre.value === 'All') {
@@ -76,42 +72,33 @@ watch(genre, () => {
 })
 
 
-// Sort by year
-watch(sortByYear, () => {
-  if (sortByYear.value) {
-     movies.value = originalMovies.sort((a, b) => b.Year - a.Year)
+// Sort Movies
+watch(sortValue, () => {
+  if (sortValue.value) {
+     if(sortValue.value === "Year"){
+        return movies.value.sort((a, b) => b.Year - a.Year)
+     }
+     else if(sortValue.value === 'Title') {
+        return movies.value.sort((a, b) => {
+            const titleA = a.Title.toUpperCase()
+            const titleB = b.Title.toUpperCase()
+
+            if(titleA < titleB) {
+                return -1
+            }
+            if(titleA > titleB) {
+                return 1
+            }
+            return 0
+        })
+     } else {
+            return movies.value.sort((a, b) => b.imdbRating - a.imdbRating)
+        }
+    //  return movies.value = originalMovies.sort((a, b) => a.Year - b.Year);
   } else {
-    
-    movies.value = originalMovies.sort((a, b) => a.Year - b.Year);
+    return false
   }
 });
-
-// Sort by rating
-watch(sortByRating, () => {
-  if (sortByRating.value) {
-     movies.value = originalMovies.sort((a, b) => b.imdbRating - a.imdbRating)
-  } else {
-    
-    movies.value = originalMovies.sort((a, b) => a.imdbRating - b.imdbRating);
-  }
-});
-
-// Sort by title
-
-watch(sortByTitle, () => {
-    movies.value =  originalMovies.sort((a, b) => {
-        const titleA = a.Title.toUpperCase()
-        const titleB = b.Title.toUpperCase()
-
-        if(titleA < titleB) {
-            return -1
-        }
-        if(titleA > titleB) {
-            return 1
-        }
-        return 0
-    })
-})
 
 </script>
 
@@ -131,14 +118,11 @@ watch(sortByTitle, () => {
                 <div class="flex space-x-4">
                     <TheFilter v-model:filterValue="genre"/>
                     <TheSorting 
-                    v-model:sortByYear="sortByYear"
-                    v-model:sortByTitle="sortByTitle"
-                    v-model:sortByRating="sortByRating"
-                    v-model:yes="yes"/>
+                    v-model:sortValue="sortValue"/>
                 </div>
            </div>
         </div>
-        <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8">
+        <div v-if="movies" class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8">
             <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">
                 <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
                 <div class="flex flex-col space-y-2">
@@ -147,10 +131,25 @@ watch(sortByTitle, () => {
                     <Icon icon="iwwa:year"  class="flex text-gray-400 h-6 w-6 2xl:h-10 2xl:w-10"/>
                     <span class="text-white font-bold 2xl:text-3xl">{{ movie.Year }}</span>
                 </div>
+
+                    <div class="flex space-x-2">
+                        <Icon icon="material-symbols:star" class="flex text-pink-600 h-6 2xl:h-10 w-6 2xl:w-10"/>
+                        <span class="text-white font-bold 2xl:text-3xl">{{ movie.imdbRating }}</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex justify-end space-x-5 bg-[#131212] px-4 sm:px-8 md:px-16 py-8"> 
+        <div v-else class="text-white bg-[#131212] h-64 flex flex-col justify-center items-center">
+            <div class="flex items-center justify-center">
+                <span class="loading loading-ball loading-xs"></span>
+                <span class="loading loading-ball loading-sm"></span>
+                <span class="loading loading-ball loading-md"></span>
+                <span class="loading loading-ball loading-lg"></span>
+                <span class="loading loading-ball loading-lg"></span>
+            </div>
+            <p>Loading.....</p>
+        </div>
+        <div v-if="movies" class="flex justify-end space-x-5 bg-[#131212] px-4 sm:px-8 md:px-16 py-8"> 
             <button class="flex space-x-3 items-center bg-pink-700 text-white px-4 py-2 border border-blue-500" v-if="page > 1" @click="page -= 1">
             <span>prev page</span>
             <Icon icon="ooui:next-rtl" />

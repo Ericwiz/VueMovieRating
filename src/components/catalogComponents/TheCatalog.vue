@@ -5,6 +5,8 @@ import SearchBar from './SearchBar.vue'
 
 import TheFilter from './TheFilter.vue'
 
+import TheSorting from './TheSorting.vue'
+
 import { Icon } from "@iconify/vue";
 
 import useMovie from "../../composables/useMovie";
@@ -19,6 +21,14 @@ const title = ref('love')
 
 const genre = ref('All')
 
+const sortByRating = ref(null)
+
+const sortByYear = ref(true)
+
+const sortByTitle = ref(null)
+
+const yes = ref(null)
+
 const movies = ref(null)
 
 let originalMovies = []
@@ -28,6 +38,7 @@ function getMovies() {
         .then(res => {
             originalMovies = res.map(movies => movies.data)
             movies.value = originalMovies
+            console.log('movies', movies.value)
             return movies
         })
 }
@@ -44,7 +55,7 @@ function search() {
     getMovies()
     
 }
-
+// filter by genre 
 watch(genre, () => {
   if (genre.value) {
     if (genre.value === 'All') {
@@ -54,8 +65,6 @@ watch(genre, () => {
          movies.value = originalMovies.filter(movie => {
         if (movie.Genre) {
           const movieGenres = movie.Genre.split(',').map(genre => genre.trim());
-          // console.log("Split", genre)
-          // console.log("movieGenres", movieGenres.includes(genre.value))
           return movieGenres.includes(genre.value);
         }
         return false;
@@ -63,9 +72,47 @@ watch(genre, () => {
     }
     console.log('Filtered Movies:', movies.value);
     return movies.value
-    // Use the filtered movies array as needed
   }
 })
+
+
+// Sort by year
+watch(sortByYear, () => {
+  if (sortByYear.value) {
+     movies.value = originalMovies.sort((a, b) => b.Year - a.Year)
+  } else {
+    
+    movies.value = originalMovies.sort((a, b) => a.Year - b.Year);
+  }
+});
+
+// Sort by rating
+watch(sortByRating, () => {
+  if (sortByRating.value) {
+     movies.value = originalMovies.sort((a, b) => b.imdbRating - a.imdbRating)
+  } else {
+    
+    movies.value = originalMovies.sort((a, b) => a.imdbRating - b.imdbRating);
+  }
+});
+
+// Sort by title
+
+watch(sortByTitle, () => {
+    movies.value =  originalMovies.sort((a, b) => {
+        const titleA = a.Title.toUpperCase()
+        const titleB = b.Title.toUpperCase()
+
+        if(titleA < titleB) {
+            return -1
+        }
+        if(titleA > titleB) {
+            return 1
+        }
+        return 0
+    })
+})
+
 </script>
 
 <template>
@@ -81,7 +128,14 @@ watch(genre, () => {
                 v-model:year="year" 
                 @search="search"/>
 
-                <TheFilter v-model:filterValue="genre"/>
+                <div class="flex space-x-4">
+                    <TheFilter v-model:filterValue="genre"/>
+                    <TheSorting 
+                    v-model:sortByYear="sortByYear"
+                    v-model:sortByTitle="sortByTitle"
+                    v-model:sortByRating="sortByRating"
+                    v-model:yes="yes"/>
+                </div>
            </div>
         </div>
         <div class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8">

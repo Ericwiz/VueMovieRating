@@ -21,7 +21,7 @@ const latestMovies = computed(() => {
 </script>
 
 <template>
-    <div class="grid gap-8 grid-cols-1  xs:grid-cols-2 text-white 2xl:gap-16">
+    <div v-if="latestMovies" class="grid gap-8 grid-cols-1  xs:grid-cols-2 text-white 2xl:gap-16">
         <div v-for="movie in latestMovies" :key="movie.imdbID" class="flex flex-col lg:flex-row space-y-3 md:space-x-6">
         <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 lg:w-60 2xl:w-2/4 2xl:h-full">
             <div class="flex flex-col space-y-2 2xl:space-y-4">

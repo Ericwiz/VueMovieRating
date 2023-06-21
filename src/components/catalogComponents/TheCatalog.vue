@@ -192,14 +192,18 @@ function sortMovies() {
             <p>Loading.....</p>
         </div>
         <div v-if="movies" class="flex justify-end space-x-5 bg-[#131212] px-4 sm:px-8 md:px-16 py-8"> 
-            <button class="flex space-x-3 items-center bg-pink-700 text-white px-4 py-2 border border-blue-500" v-if="page > 1" @click="page -= 1">
-            <span>prev page</span>
-            <Icon icon="ooui:next-rtl" />
-            </button>
-            <button @click="page += 1" class="flex space-x-3 bg-pink-700 text-white px-4 py-2 items-center border border-blue-500">
+            <RouterLink :to="{name: 'catalog', query: {page: page}}">
+                <button class="flex space-x-3 items-center bg-pink-700 text-white px-4 py-2 border border-blue-500" v-if="page > 1" @click="page -= 1">
+                <span>prev page</span>
+                <Icon icon="ooui:next-rtl" />
+                </button>
+            </RouterLink>
+            <RouterLink :to="{name: 'catalog', query: {page: page}}">
+                <button @click="page += 1" class="flex space-x-3 bg-pink-700 text-white px-4 py-2 items-center border border-blue-500">
                 <span>next page</span>
                 <Icon icon="ooui:next-ltr" />
-            </button>
+                </button>
+            </RouterLink>
 
         </div>
     </div>

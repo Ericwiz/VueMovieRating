@@ -4,8 +4,16 @@ const router = createRouter({
    history: createWebHistory(import.meta.env.BASE_URL),
    linkActiveClass: 'active',
    routes: [
-    { path: '/', name: 'home', component: HomeView },
-    { path: '/catalog', name: 'catalog', component: () => import('../views/CatalogView.vue') },
+    { path: '/',
+     name: 'home', 
+     component: HomeView 
+   },
+    { 
+      path: '/catalog', 
+      name: 'catalog', 
+      component: () => import('../views/CatalogView.vue'),
+      props: routes => ({page: routes.query.page})
+   },
    ]
 })
 

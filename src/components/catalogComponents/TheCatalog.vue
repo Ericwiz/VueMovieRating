@@ -21,7 +21,21 @@ const title = ref('love')
 
 const genre = ref('')
 
+const drama = ref(false)
+
+const adventure = ref(false)
+
+const action = ref(false)
+
+const romance = ref(false)
+
+const love = ref(false)
+
+const comedy = ref(false)
+
 const sortValue = ref('')
+
+let triggerWatch = ref(0)
 
 const movies = ref(null)
 
@@ -49,32 +63,49 @@ watch(page, () => {
 
 function search() {
     getMovies()
-    
+    setTimeout(() => {
+        triggerWatch.value += 1
+    }, 2000)
+    watch([drama, adventure, comedy, love, action, romance, sortValue, triggerWatch], () => {
+    filterMovies()
+    sortMovies()
+})
 }
-// filter movies by genre 
-watch(genre, () => {
-  if (genre.value) {
-    if (genre.value === 'All') {
-      console.log('First Movies Value Here:',  movies.value);
-        movies.value = originalMovies ; // Reset movies.value to the original list
-    } else {
-         movies.value = originalMovies.filter(movie => {
-        if (movie.Genre) {
-          const movieGenres = movie.Genre.split(',').map(genre => genre.trim());
-          return movieGenres.includes(genre.value);
-        }
-        return false;
-      });
-    }
-    console.log('Filtered Movies:', movies.value);
-    return movies.value
-  }
+
+watch([drama, adventure, comedy, love, action, romance, sortValue], () => {
+    filterMovies()
+    sortMovies()
 })
 
+// filter movies by genres
+function filterMovies () {
+    movies.value = originalMovies.filter(movie => {
+        const movieGenres = movie.Genre.split(',').map(genre => genre.trim());
+        const selectedGenres = []
+        if(drama.value) {
+             selectedGenres.push('Drama')
+        } 
+        if (adventure.value) {
+             selectedGenres.push('Adventure')
+        } if(action.value) {
+            selectedGenres.push('Action')
+        } if(comedy.value) {
+            selectedGenres.push('Comedy')
+        }if(love.value) {
+            selectedGenres.push('Love')
+        }if(romance.value) {
+            selectedGenres.push('Romance')
+        }
+        if(selectedGenres.length === 0) {
+            return movies.value = originalMovies
+        } 
+        return selectedGenres.some(genre => movieGenres.includes(genre))
+    })
+}
 
 // Sort Movies
-watch(sortValue, () => {
-  if (sortValue.value) {
+function sortMovies() {
+    if (sortValue.value) {
      if(sortValue.value === "Year"){
         return movies.value.sort((a, b) => b.Year - a.Year)
      }
@@ -98,7 +129,7 @@ watch(sortValue, () => {
   } else {
     return false
   }
-});
+}
 
 </script>
 
@@ -118,7 +149,14 @@ watch(sortValue, () => {
                 </div>
 
                 <div class="flex space-x-4">
-                    <TheFilter v-model:filterValue="genre"/>
+                    <TheFilter
+                        v-model:drama="drama"
+                        v-model:adventure="adventure"
+                        v-model:action="action"
+                        v-model:romance="romance"
+                        v-model:love="love"
+                        v-model:comedy="comedy"
+                    />
                     <TheSorting 
                     v-model:sortValue="sortValue"/>
                 </div>

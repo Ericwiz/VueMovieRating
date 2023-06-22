@@ -1,5 +1,7 @@
 import { ref } from "vue"
 
+import { useStorage } from '@vueuse/core'
+
 
 export default function useFeedback() {
     let feedBacks = ref([])
@@ -18,13 +20,13 @@ export default function useFeedback() {
             feedbackText.value, 
             movieId: movieId})
 
-          author.value = ''
-          rating.value = 5
-          feedbackText.value = ''
+            const state = useStorage('reviews', feedBacks.value)
+            author.value = ''
+            rating.value = 5
+            feedbackText.value = ''
+            return state
          
-         return localStorage.setItem('reviews', JSON.stringify(
-            feedBacks.value
-        ))
+          
     }
 
 

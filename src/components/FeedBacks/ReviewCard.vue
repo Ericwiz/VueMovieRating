@@ -73,11 +73,11 @@ const id = computed(() => {
 onMounted(() => {
     movieId.value = id.value
 
-    if(feedBacks.length != -1) {
+    if(feedBacks.value.length !== -1) {
     return feedBacks.value = JSON.parse(localStorage.getItem('reviews'))
     }
     else {
-        return feedBacks.value
+        return feedBacks.value = []
     }
 })
 </script>

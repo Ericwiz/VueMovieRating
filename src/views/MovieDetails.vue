@@ -38,9 +38,7 @@
             </div>
         </section>
 
-        <section class="px-4 sm:px-8 md:px-16 py-5 text-white border-t-2 border-pink-600">
-            
-        </section>
+        <FeedBack />
     </article>
 </template>
 
@@ -48,6 +46,7 @@
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { Icon } from '@iconify/vue';
+import FeedBack from '../components/FeedBacks/FeedBack.vue';
 const apikey = (import.meta.env.VITE_API_KEY)
 const movie = ref(null)
 

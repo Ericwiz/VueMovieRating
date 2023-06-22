@@ -165,20 +165,22 @@ function sortMovies() {
 
 
         <div v-if="movies" class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8">
-            <div v-for="movie in movies" :key="movie.imdbID" class="flex flex-col space-y-3">
-                <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
-                <div class="flex flex-col space-y-2">
-                    <h1 class="text 2xl:text-lg">{{ movie.Title }}</h1>
-                <div class="flex space-x-2">
-                    <Icon icon="iwwa:year"  class="flex text-gray-400 h-6 w-6 2xl:h-8 2xl:w-8"/>
-                    <span class="text-white font-bold 2xl:text-2xl">{{ movie.Year }}</span>
-                </div>
-
+            <div v-for="movie in movies" :key="movie.imdbID">
+                <RouterLink class="flex flex-col space-y-3" :to="{name: 'movie.details', params: {id: movie.imdbID}}">
+                    <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full xs:h-72 xs:w-72 xl:w-full xl:h-full">
+                    <div class="flex flex-col space-y-2">
+                        <h1 class="text 2xl:text-lg">{{ movie.Title }}</h1>
                     <div class="flex space-x-2">
-                        <Icon icon="material-symbols:star" class="flex text-pink-600 h-6 2xl:h-8 w-6 2xl:w-8"/>
-                        <span class="text-white font-bold 2xl:text-2xl">{{ movie.imdbRating }}</span>
+                        <Icon icon="iwwa:year"  class="flex text-gray-400 h-6 w-6 2xl:h-8 2xl:w-8"/>
+                        <span class="text-white font-bold 2xl:text-2xl">{{ movie.Year }}</span>
                     </div>
-                </div>
+
+                        <div class="flex space-x-2">
+                            <Icon icon="material-symbols:star" class="flex text-pink-600 h-6 2xl:h-8 w-6 2xl:w-8"/>
+                            <span class="text-white font-bold 2xl:text-2xl">{{ movie.imdbRating }}</span>
+                        </div>
+                    </div>
+                </RouterLink>
             </div>
         </div>
         <div v-else class="text-white bg-[#131212] h-64 flex flex-col justify-center items-center">

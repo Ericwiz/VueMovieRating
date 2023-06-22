@@ -40,7 +40,10 @@ export default function useMovie() {
     };
   
     return axios.get('https://www.omdbapi.com/', { params })
-      .then(response => response.data)
+      .then(response => {
+        console.log(response.data)
+        return response.data
+      })
       .catch(err => {
         alert(err);
         return []; 

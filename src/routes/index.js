@@ -14,6 +14,14 @@ const router = createRouter({
       component: () => import('../views/CatalogView.vue'),
       props: routes => ({page: routes.query.page})
    },
+
+   { 
+      path: '/catalog/:id', 
+      name: 'movie.details', 
+      component: () => import('../views/MovieDetails.vue'),
+      props: routes => ({id: routes.params.id})
+   },
+
    ]
 })
 

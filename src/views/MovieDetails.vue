@@ -38,7 +38,9 @@
             </div>
         </section>
 
-        <FeedBack />
+        <section>
+            <FeedBack />
+        </section>
     </article>
 </template>
 

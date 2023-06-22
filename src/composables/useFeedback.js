@@ -14,7 +14,7 @@ export default function useFeedback() {
         feedBacks.value.push({id: id.value+=1, author: author.value, rating: rating.value, feedbackText: feedbackText.value, movieId: movieId})
 
           author.value = ''
-          rating.value = 0 
+          rating.value = 1
           feedbackText.value = ''
          
          return localStorage.setItem('reviews', JSON.stringify(

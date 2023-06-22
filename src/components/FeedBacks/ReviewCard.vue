@@ -1,5 +1,6 @@
 <template>
     <div class="lg:w-[120rem]">
+        <h1 class="text-center text-lg text-gray-300 capitalize py-4">Add your reviews</h1>
         <div v-for="feedBack in feedBacks" :key="feedBack.id">
             <div v-if="feedBack.movieId === id">
                 <div class="pb-5 flex justify-between items-center">

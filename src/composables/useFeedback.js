@@ -10,10 +10,16 @@ export default function useFeedback() {
     const rating = ref(5)
 
     function addReview() {
-        feedBacks.value.push({id: id.value+=1, author: author.value, rating: rating.value, feedbackText: feedbackText.value, movieId: movieId})
+        feedBacks.value.push({id: 
+            id.value+=1, author: 
+            author.value, rating: 
+            rating.value, 
+            feedbackText: 
+            feedbackText.value, 
+            movieId: movieId})
 
           author.value = ''
-          rating.value = 1
+          rating.value = 5
           feedbackText.value = ''
          
          return localStorage.setItem('reviews', JSON.stringify(
@@ -23,6 +29,13 @@ export default function useFeedback() {
 
 
 
-    return { addReview, author, id, feedBacks, rating, feedbackText, movieId}
+    return { 
+        addReview, 
+        author, 
+        id, 
+        feedBacks, 
+        rating, 
+        feedbackText, 
+        movieId}
     
 }

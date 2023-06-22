@@ -1,11 +1,11 @@
 <template>
     <article class="pt-32 bg-[#2b2b31] h-full">
-        <section v-if="movie" class="flex flex-row justify-between space-x-6 pb-24 px-4 sm:px-8 md:px-16">
+        <section v-if="movie" class="flex flex-col md:flex-row justify-between space-x-6 pb-24 px-4 sm:px-8 md:px-16">
             <div class="">
-                <img :src="movie.Poster" alt="poster" class="rounded-sm w-96 h-96">
+                <img :src="movie.Poster" alt="poster" class="rounded-sm w-full h-full md:w-96 md:h-96">
             </div>
             <div class="flex flex-col space-y-2 2xl:space-y-4">
-                <h1 class="text-3xl 2xl:text-4xl text-white">{{ movie.Title }}</h1>
+                <h1 class="text-lg sm:text-2xl pt-2 md:pt-0 md:text-3xl 2xl:text-4xl text-white">{{ movie.Title }}</h1>
                 <p class="font-normal 2xl:text-2xl pt-5">
                     <span class="text-lg text-white pr-4">Genre:</span>
                     <span class="text-pink-600 text-small">{{ movie.Genre }}</span>

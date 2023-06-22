@@ -35,15 +35,17 @@ const sampleMovies = computed(() => {
 
        <div v-if="movies" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-14 cursor-pointer items-center">
             <div v-for="(movie, index) in sampleMovies" :key="movie.imdbID" :class="{'hidden lg:block': index > 1, 'hidden sm:block': index === 1 }" class="justify-self-center xs:justify-self-auto">
-                <img :src="movie.Poster" alt="movie poster" class="h-fit w-fit xs:w-full sm:h-96 w-84 rounded-sm 2xl:h-full">
-                <div class="py-3">
-                    <h2 class="text-white truncate 2xl:text-2xl">{{ movie.Title }}</h2>
-                    <p class="text-pink-600 text-sm py-2 2xl:text-lg">{{ movie.Genre }}</p>
-                    <div class="flex space-x-2">
-                        <Icon icon="iwwa:year" class="flex h-6 w-6 2xl:h-8 2xl:w-8 text-gray-400"/>
-                        <span class="text-white font-bold 2xl:text-lg">{{ movie.Year }}</span>
+                <RouterLink :to="{name: 'movie.details', params: {id: movie.imdbID}}">
+                    <img :src="movie.Poster" alt="movie poster" class="h-fit w-fit xs:w-full sm:h-96 w-84 rounded-sm 2xl:h-full">
+                    <div class="py-3">
+                        <h2 class="text-white truncate 2xl:text-2xl">{{ movie.Title }}</h2>
+                        <p class="text-pink-600 text-sm py-2 2xl:text-lg">{{ movie.Genre }}</p>
+                        <div class="flex space-x-2">
+                            <Icon icon="iwwa:year" class="flex h-6 w-6 2xl:h-8 2xl:w-8 text-gray-400"/>
+                            <span class="text-white font-bold 2xl:text-lg">{{ movie.Year }}</span>
+                        </div>
                     </div>
-                </div>
+                </RouterLink>
             </div>
        </div>
 

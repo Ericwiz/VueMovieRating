@@ -1,6 +1,6 @@
 <template>
     <div class="lg:w-[120rem]">
-        <div v-for="feedBack in feedBacks" :key="feedBack.id" class="pb-8">
+        <div v-for="feedBack in feedBacks" :key="feedBack.id">
             <div v-if="feedBack.movieId === id">
                 <div class="pb-5 flex justify-between items-center">
                     <div class="flex items-center space-x-3">

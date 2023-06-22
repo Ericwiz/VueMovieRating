@@ -2,13 +2,12 @@ import { ref } from "vue"
 
 
 export default function useFeedback() {
-    const author = ref('')
-    const id = ref(0)
-    const rating = ref(5)
-    const feedbackText = ref('')
-    const movieId = ref('')
-
     let feedBacks = ref([])
+    const movieId = ref('')
+    const id = ref(0)
+    const author = ref('')
+    const feedbackText = ref('')
+    const rating = ref(5)
 
     function addReview() {
         feedBacks.value.push({id: id.value+=1, author: author.value, rating: rating.value, feedbackText: feedbackText.value, movieId: movieId})
@@ -22,12 +21,8 @@ export default function useFeedback() {
         ))
     }
 
-    function addComment() {
-        return feedBacks.value.push({id: id.value+=1, author: author, rating: rating, feedbackText: feedbackText})
-    }
 
 
-
-    return { addReview, addComment, author, id, feedBacks, rating, feedbackText, movieId}
+    return { addReview, author, id, feedBacks, rating, feedbackText, movieId}
     
 }

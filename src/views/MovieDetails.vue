@@ -4,7 +4,7 @@
       v-if="movie"
       class="flex flex-col md:flex-row justify-between space-x-6 pb-24 px-4 sm:px-8 md:px-16"
     >
-      <div class="w-[60%]">
+      <div class="w-full md:w-[60%]">
         <img
           :src="movie.Poster"
           alt="poster"

@@ -13,6 +13,7 @@
 
                     <div>
                         <h3 class="text-normal text-white xl:text-lg">{{ feedBack.author }}</h3>
+                        <span class="text-xs text-gray-400">{{ feedBack.time }}</span>
                     </div>
                     </div>
                 
@@ -21,14 +22,14 @@
                         <p class="text-white">{{ feedBack.rating }}</p>
                     </div>
                 </div>
-                <div>
-                <p class="px-6 mb-4 py-5 rounded-sm bg-[#08080a] text-white flex flex-col items-start space-y-5">{{ feedBack.feedbackText }}</p>
+                <div class="pb-8">
+                <p class="px-6 mb-4 py-5 rounded-sm bg-[#08080a] text-gray-300 flex flex-col items-start space-y-5">{{ feedBack.feedbackText }}</p>
             </div>
             </div>
         </div>
 
 
-        <form @submit.prevent="addReview()" class="px-6 pb-5 pt-8 rounded-md bg-[#28282b] flex flex-col items-start space-y-5">
+        <form @submit.prevent="addReview()" class="px-6 pb-5 pt-12 rounded-md bg-[#28282b] flex flex-col items-start space-y-5">
                 <div class="w-full">
                     <input type="text" placeholder="Enter your name!"
                     v-model="author" class="w-full h-10 text-white px-3 py-2 bg-[#2b2b31] rounded-md outline-pink-600">
@@ -58,13 +59,14 @@
 
 <script setup>
 import useFeedback from '../../composables/useFeedback';
+import { useNow, useDateFormat } from '@vueuse/core';
 import { Icon } from '@iconify/vue';
 import { useRoute } from 'vue-router'
 
 import { computed, onMounted } from 'vue';
 
 const route = useRoute()
-const { id, author, rating, feedBacks, feedbackText, movieId, addToStorage} = useFeedback()
+const { id, author, rating, feedBacks, feedbackText, movieId, time, addToStorage} = useFeedback()
 
 
 const imdbId = computed(() => {
@@ -77,7 +79,8 @@ function addReview() {
         author: author.value, 
         rating: rating.value, 
         feedbackText: feedbackText.value, 
-        movieId: movieId.value
+        movieId: movieId.value,
+        time: time.value
     })
             
     author.value = ''
@@ -88,8 +91,11 @@ function addReview() {
           
 }
 
+const currentTime = useDateFormat(useNow(), 'DD.MM.YYYY, h:m A')
+
 onMounted(() => {
     movieId.value = imdbId.value
+    time.value = currentTime
     addToStorage('reviews', feedBacks.value)
     if(feedBacks.value.length !== -1) {
         return feedBacks.value = addToStorage('reviews', feedBacks.value)

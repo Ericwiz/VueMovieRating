@@ -39,10 +39,10 @@ const showMobileMenu = ref(true)
         <!-- Mobile Menu -->
         <div class="md:hidden z-50 bg-[#191517] px-8 pt-4 w-full sm:w-4/6 h-screen text-white absolute" :class="[showMobileMenu ? '-right-[100%]' : 'right-0', 'transition-all duration-500']">
             <div class="flex space-x-10 text-lg text-white">
-                <RouterLink to="/" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</RouterLink>
-                <RouterLink to="/catalog" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</RouterLink>
+                <RouterLink @click="showMobileMenu = !showMobileMenu" to="/" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Home</RouterLink>
+                <RouterLink @click="showMobileMenu = !showMobileMenu" to="/catalog" active-class="active" class="uppercase text-gray-100 hover:text-gray-300 transition-all duration-300">Catalog</RouterLink>
             </div>
-            <div class="block md:hidden pt-5">
+            <div @click="showMobileMenu = !showMobileMenu" class="block md:hidden pt-5">
                     <RouterLink to="/catalog" class="flex items-center space-x-2 text-gray-400"> 
                         <Icon icon="iconamoon:search-fill" class="h-4 w-4 2xl:h-10 2xl:w-10"/>
                         <span class="">Search</span>

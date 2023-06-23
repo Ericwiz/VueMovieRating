@@ -9,6 +9,7 @@ export default function useFeedback() {
     const author = ref('')
     const feedbackText = ref('')
     const rating = ref(5)
+    const time = ref('')
 
     let feedBacks = ref([])
 
@@ -25,6 +26,7 @@ export default function useFeedback() {
         rating, 
         feedbackText, 
         movieId,
+        time,
         addToStorage
       }
     

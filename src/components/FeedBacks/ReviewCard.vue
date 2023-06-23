@@ -2,7 +2,7 @@
     <div class="lg:w-[120rem]">
         <h1 class="text-center text-lg text-gray-300 capitalize py-4">Add your reviews</h1>
         <div v-for="feedBack in feedBacks" :key="feedBack.id">
-            <div v-if="feedBack.movieId === id">
+            <div v-if="feedBack.movieId === imdbId">
                 <div class="pb-5 flex justify-between items-center">
                     <div class="flex items-center space-x-3">
                         <div class="bg-gray-300 rounded-full px-3 py-3 w-12">
@@ -64,20 +64,39 @@ import { useRoute } from 'vue-router'
 import { computed, onMounted } from 'vue';
 
 const route = useRoute()
-const { author, rating, feedBacks, feedbackText, addReview, movieId} = useFeedback()
+const { id, author, rating, feedBacks, feedbackText, movieId, addToStorage} = useFeedback()
 
 
-const id = computed(() => {
+const imdbId = computed(() => {
     return route.params.id
 })
-onMounted(() => {
-    movieId.value = id.value
 
+function addReview() {
+    feedBacks.value.push({
+        id: id.value+=1, 
+        author: author.value, 
+        rating: rating.value, 
+        feedbackText: feedbackText.value, 
+        movieId: movieId.value
+    })
+            
+    author.value = ''
+    rating.value = 5
+    feedbackText.value = ''   
+    console.log(feedBacks.value)
+    return feedBacks.value
+          
+}
+
+onMounted(() => {
+    movieId.value = imdbId.value
+    addToStorage('reviews', feedBacks.value)
     if(feedBacks.value.length !== -1) {
-    return feedBacks.value = JSON.parse(localStorage.getItem('reviews'))
+        return feedBacks.value = addToStorage('reviews', feedBacks.value)
+
     }
     else {
-        return feedBacks.value = []
+        return false
     }
 })
 </script>

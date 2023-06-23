@@ -58,15 +58,23 @@
 </template>
 
 <script setup>
-import useFeedback from '../../composables/useFeedback';
+import useLocalStorage from '../../composables/useLocalStorage';
 import { useNow, useDateFormat } from '@vueuse/core';
 import { Icon } from '@iconify/vue';
 import { useRoute } from 'vue-router'
-
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const route = useRoute()
-const { id, author, rating, feedBacks, feedbackText, movieId, time, addToStorage} = useFeedback()
+
+let feedBacks = ref([])
+const movieId = ref('')
+const id = ref(0)
+const author = ref('')
+const feedbackText = ref('')
+const rating = ref(5)
+const time = ref('')
+
+const { addToStorage} = useLocalStorage()
 
 
 const imdbId = computed(() => {

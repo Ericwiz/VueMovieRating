@@ -1,28 +1,27 @@
 import { ref } from 'vue'
 import axios from 'axios'
-const apikey = (import.meta.env.VITE_API_KEY)
+const apikey = import.meta.env.VITE_API_KEY
 
 export default function useMovie() {
-    const movies = ref([])
+  const movies = ref([])
   // retrieve the movies from the Api
-   function fetchMovies(searchTerm = 'love', year, page = 1 ) {
+  function fetchMovies(searchTerm = 'love', year, page = 1) {
     const params = {
       apikey: apikey,
       s: searchTerm,
       y: year,
       page: page
-    };
-    return axios.get('https://www.omdbapi.com/', {params})
-      .then(response => {
-        const movieList = response.data.Search
+    }
+    return axios.get('https://www.omdbapi.com/', { params }).then((response) => {
+      const movieList = response.data.Search
       // The omdbapi search (s) param does not return the full detail for a movie, so I need
       // to query the api again with the omdbd ID of each movie to return the movie's full details
 
-        const fullMovieDetail = movieList.map((movie) => 
+      const fullMovieDetail = movieList.map((movie) =>
         axios.get('https://www.omdbapi.com/', {
           params: {
-            apikey:apikey,
-            i: movie.imdbID,
+            apikey: apikey,
+            i: movie.imdbID
           }
         })
       )
@@ -37,17 +36,18 @@ export default function useMovie() {
       s: searchTerm,
       t: movieType,
       page: page
-    };
-  
-    return axios.get('https://www.omdbapi.com/', { params })
-      .then(response => {
+    }
+
+    return axios
+      .get('https://www.omdbapi.com/', { params })
+      .then((response) => {
         console.log(response.data)
         return response.data
       })
-      .catch(err => {
-        alert(err);
-        return []; 
-      });
+      .catch((err) => {
+        alert(err)
+        return []
+      })
   }
 
   return {
@@ -56,4 +56,3 @@ export default function useMovie() {
     getFilmTypes
   }
 }
-

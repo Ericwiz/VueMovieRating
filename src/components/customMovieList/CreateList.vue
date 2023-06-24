@@ -15,19 +15,21 @@ const isListCreated = ref(false)
 
 const customMovieList = ref([])
 
+customMovieList.value = JSON.parse(localStorage.getItem('custom-movie-list', customMovieList)) || []
+
 
 function createList() {
     customMovieList.value.push({id: listId.value + 1, name: listName.value})
+    addToStorage('custom-movie-list', customMovieList.value)
     isListCreated.value = true
     listName.value = ''
     return customMovieList.value
 }
 
 onMounted(() => {
-    addToStorage('custom-movie-list', customMovieList.value)
       if (customMovieList.value.length > -1) {
         isListCreated.value = true;
-        return (customMovieList.value = addToStorage('custom-movie-list', customMovieList.value))
+        return customMovieList.value
       }
 })
 </script>

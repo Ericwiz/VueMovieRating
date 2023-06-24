@@ -116,7 +116,8 @@ function addReview() {
     movieId: movieId.value,
     feedbackText: feedbackText.value,
     author: author.value,
-    rating: rating.value
+    rating: rating.value,
+    time: currentTime.value
   });
 
   // Store the updated array in local storage

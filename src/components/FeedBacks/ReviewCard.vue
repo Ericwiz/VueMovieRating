@@ -1,7 +1,8 @@
 <template>
   <div class="lg:w-[120rem]">
     <h1 class="text-center text-lg text-gray-300 capitalize py-4">Add your reviews</h1>
-    <div v-for="feedBack in feedBacks" :key="feedBack.id">
+    <div v-if="feedBacks">
+    <template v-for="feedBack in feedBacks" :key="feedBack.id">
       <div v-if="feedBack.movieId === imdbId">
         <div class="pb-5 flex justify-between items-center">
           <div class="flex items-center space-x-3">
@@ -41,7 +42,8 @@
           </p>
         </div>
       </div>
-    </div>
+    </template>
+  </div>
 
     <form
       @submit.prevent="addReview()"
@@ -52,6 +54,7 @@
           type="text"
           placeholder="Enter your name!"
           v-model="author"
+          required
           class="w-full h-10 text-white px-3 py-2 bg-[#2b2b31] rounded-md outline-pink-600"
         />
       </div>
@@ -89,7 +92,7 @@ import { computed, onMounted, ref } from 'vue'
 
 const route = useRoute()
 
-let feedBacks = ref([])
+const feedBacks = ref([])
 const movieId = ref('')
 const id = ref(0)
 const author = ref('')
@@ -103,33 +106,28 @@ const imdbId = computed(() => {
   return route.params.id
 })
 
-function addReview() {
-  feedBacks.value.push({
-    id: (id.value += 1),
-    author: author.value,
-    rating: rating.value,
-    feedbackText: feedbackText.value,
-    movieId: movieId.value,
-    time: time.value
-  })
+const currentTime = useDateFormat(useNow(), 'DD.MM.YYYY, h:m A')
+feedBacks.value = JSON.parse(localStorage.getItem('reviews')) || []
 
-  author.value = ''
-  rating.value = 5
-  feedbackText.value = ''
-  console.log(feedBacks.value)
+function addReview() {
+  // Push the new review to the existing array
+  feedBacks.value.push({
+    id: id.value,
+    movieId: movieId.value,
+    feedbackText: feedbackText.value,
+    author: author.value,
+    rating: rating.value
+  });
+
+  // Store the updated array in local storage
+  addToStorage('reviews', feedBacks.value);
   return feedBacks.value
 }
-
-const currentTime = useDateFormat(useNow(), 'DD.MM.YYYY, h:m A')
 
 onMounted(() => {
   movieId.value = imdbId.value
   time.value = currentTime
-  addToStorage('reviews', feedBacks.value)
-  if (feedBacks.value.length !== -1) {
-    return (feedBacks.value = addToStorage('reviews', feedBacks.value))
-  } else {
-    return false
-  }
+   return feedBacks.value
 })
+
 </script>

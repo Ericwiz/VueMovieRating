@@ -22,10 +22,14 @@ const showMobileMenu = ref(true)
       </div>
 
       <!-- Secondary Nav -->
-      <div class="hidden md:block">
+      <div class="hidden md:flex md:space-x-10 md:justify-between">
         <RouterLink to="/catalog" class="flex items-center space-x-2 text-gray-400">
           <Icon icon="iconamoon:search-fill" class="h-4 w-4 2xl:h-10 2xl:w-10" />
           <span class="">Search</span>
+        </RouterLink>
+        <RouterLink to="/my-movie-lists" class="flex items-center space-x-2 text-gray-400">
+          <Icon icon="streamline:entertainment-play-list-1-screen-television-display-player-movies-movie-tv-media-players-video" />
+          <span>Custom movies</span>
         </RouterLink>
       </div>
 

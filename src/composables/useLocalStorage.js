@@ -1,9 +1,8 @@
-import { useStorage } from '@vueuse/core'
+// import { useStorage } from '@vueuse/core'
 
-export default function useFeedback() {
+export default function useLocalStorage() {
   function addToStorage(key, value) {
-    const state = useStorage(key, value)
-    return state.value
-  }
+     localStorage.setItem(key, JSON.stringify(value))
+  } 
   return { addToStorage }
 }

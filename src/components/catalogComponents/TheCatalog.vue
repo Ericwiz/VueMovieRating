@@ -52,7 +52,7 @@ onMounted(() => {
   getMovies();
 });
 
-// Re-fetch movies when the relevant dependencies change
+// Re-fetch movies when relevant dependencies change, e.g, the search input.
 watchEffect( () => {
   getMovies();
   sortValue.value = "";
@@ -61,7 +61,7 @@ watchEffect( () => {
   }, 1000);
 });
 
-// Perform movie search
+// Perform movie search (defualt search)
 function search() {
   getMovies();
   setTimeout(() => {

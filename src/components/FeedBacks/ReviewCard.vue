@@ -1,6 +1,6 @@
 <template>
   <div class="lg:w-[120rem]">
-    <h1 class="text-center text-lg text-gray-300 capitalize py-4">Add your reviews</h1>
+    <h1 class="text-center text-lg text-gray-300 capitalize py-4 2xl:text-3xl">Add your reviews</h1>
     <div v-if="feedBacks">
       <template v-for="feedBack in feedBacks" :key="feedBack.id">
         <div v-if="feedBack.movieId === imdbId">
@@ -70,7 +70,7 @@
       </div>
 
       <div class="flex flex-col space-y-2">
-        <label class="text-white">Rate:</label>
+        <label class="text-white 2xl:text-lg">Rate:</label>
         <div class="flex items-center space-x-4">
           <input type="range" min="1" max="5" v-model="rating" class="range range-warning" />
           <div class="flex space-x-1">
@@ -125,6 +125,10 @@ function addReview() {
 
   // Store the updated array in local storage
   addToStorage("reviews", feedBacks.value);
+
+  // reset the input values to empty strings
+  author.value = ""
+  feedbackText.value = ""
   return feedBacks.value;
 }
 

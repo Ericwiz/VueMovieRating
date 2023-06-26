@@ -14,7 +14,7 @@ export default function useMovie() {
     };
     return axios.get("https://www.omdbapi.com/", { params }).then((response) => {
       const movieList = response.data.Search;
-      // The omdbapi search (s) param does not return the full detail for a movie, so I need
+      // The omdbapi search (s) param does not return the full details for a movie, so we need
       // to query the api again with the omdbd ID of each movie to return the movie's full details
 
       const fullMovieDetail = movieList.map((movie) =>
@@ -30,6 +30,8 @@ export default function useMovie() {
     });
   }
 
+  // Fetch for the movies types(Series, Movies, Episodes) section of the app, we don't need the movie's full detail here,
+  // So we're good with whatever the (s) param is returning.
   function getFilmTypes(searchTerm, movieType = "love", page) {
     const params = {
       apikey,
@@ -41,10 +43,10 @@ export default function useMovie() {
     return axios
       .get("https://www.omdbapi.com/", { params })
       .then((response) => {
-        console.log(response.data);
         return response.data;
       })
       .catch((err) => {
+        // no too much error handling, just alerting the error to the user/s here.
         alert(err);
       });
   }

@@ -1,135 +1,135 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from "vue";
 
-import SearchBar from './SearchBar.vue'
+import SearchBar from "./SearchBar.vue";
 
-import TheFilter from './TheFilter.vue'
+import TheFilter from "./TheFilter.vue";
 
-import TheSorting from './TheSorting.vue'
+import TheSorting from "./TheSorting.vue";
 
-import { Icon } from '@iconify/vue'
+import { Icon } from "@iconify/vue";
 
-import useMovie from '../../composables/useMovie'
+import useMovie from "../../composables/useMovie";
 
-const { fetchMovies } = useMovie()
+const { fetchMovies } = useMovie();
 
-const page = ref(1)
+const page = ref(1);
 
-const year = ref('')
+const year = ref("");
 
-const title = ref('love')
+const title = ref("love");
 
-const genre = ref('')
+const genre = ref("");
 
-const drama = ref(false)
+const drama = ref(false);
 
-const adventure = ref(false)
+const adventure = ref(false);
 
-const action = ref(false)
+const action = ref(false);
 
-const romance = ref(false)
+const romance = ref(false);
 
-const love = ref(false)
+const love = ref(false);
 
-const comedy = ref(false)
+const comedy = ref(false);
 
-const sortValue = ref('')
+const sortValue = ref("");
 
-let triggerWatch = ref(0)
+let triggerWatch = ref(0);
 
-const movies = ref(null)
+const movies = ref(null);
 
-let originalMovies = []
+let originalMovies = [];
 
 function getMovies() {
   return fetchMovies(title.value, year.value, page.value).then((res) => {
-    originalMovies = res.map((movies) => movies.data)
-    movies.value = originalMovies
-    console.log('movies', movies.value)
-    return movies
-  })
+    originalMovies = res.map((movies) => movies.data);
+    movies.value = originalMovies;
+    console.log("movies", movies.value);
+    return movies;
+  });
 }
 
 onMounted(() => {
-  getMovies()
-})
+  getMovies();
+});
 
 watch(page, () => {
-  getMovies()
-  genre.value = ''
-  sortValue.value = ''
-})
+  getMovies();
+  genre.value = "";
+  sortValue.value = "";
+});
 
 function search() {
-  getMovies()
+  getMovies();
   setTimeout(() => {
-    triggerWatch.value += 1
-  }, 2000)
+    triggerWatch.value += 1;
+  }, 2000);
   watch([drama, adventure, comedy, love, action, romance, sortValue, triggerWatch], () => {
-    filterMovies()
-    sortMovies()
-  })
+    filterMovies();
+    sortMovies();
+  });
 }
 
 watch([drama, adventure, comedy, love, action, romance, sortValue], () => {
-  filterMovies()
-  sortMovies()
-})
+  filterMovies();
+  sortMovies();
+});
 
 // filter movies by genres
 function filterMovies() {
   movies.value = originalMovies.filter((movie) => {
-    const movieGenres = movie.Genre.split(',').map((genre) => genre.trim())
-    const selectedGenres = []
+    const movieGenres = movie.Genre.split(",").map((genre) => genre.trim());
+    const selectedGenres = [];
     if (drama.value) {
-      selectedGenres.push('Drama')
+      selectedGenres.push("Drama");
     }
     if (adventure.value) {
-      selectedGenres.push('Adventure')
+      selectedGenres.push("Adventure");
     }
     if (action.value) {
-      selectedGenres.push('Action')
+      selectedGenres.push("Action");
     }
     if (comedy.value) {
-      selectedGenres.push('Comedy')
+      selectedGenres.push("Comedy");
     }
     if (love.value) {
-      selectedGenres.push('Love')
+      selectedGenres.push("Love");
     }
     if (romance.value) {
-      selectedGenres.push('Romance')
+      selectedGenres.push("Romance");
     }
     if (selectedGenres.length === 0) {
-      return (movies.value = originalMovies)
+      return (movies.value = originalMovies);
     }
-    return selectedGenres.some((genre) => movieGenres.includes(genre))
-  })
+    return selectedGenres.some((genre) => movieGenres.includes(genre));
+  });
 }
 
 // Sort Movies
 function sortMovies() {
   if (sortValue.value) {
-    if (sortValue.value === 'Year') {
-      return movies.value.sort((a, b) => b.Year - a.Year)
-    } else if (sortValue.value === 'Title') {
+    if (sortValue.value === "Year") {
+      return movies.value.sort((a, b) => b.Year - a.Year);
+    } else if (sortValue.value === "Title") {
       return movies.value.sort((a, b) => {
-        const titleA = a.Title.toUpperCase()
-        const titleB = b.Title.toUpperCase()
+        const titleA = a.Title.toUpperCase();
+        const titleB = b.Title.toUpperCase();
 
         if (titleA < titleB) {
-          return -1
+          return -1;
         }
         if (titleA > titleB) {
-          return 1
+          return 1;
         }
-        return 0
-      })
+        return 0;
+      });
     } else {
-      return movies.value.sort((a, b) => b.imdbRating - a.imdbRating)
+      return movies.value.sort((a, b) => b.imdbRating - a.imdbRating);
     }
     //  return movies.value = originalMovies.sort((a, b) => a.Year - b.Year);
   } else {
-    return false
+    return false;
   }
 }
 </script>

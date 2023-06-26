@@ -2,7 +2,7 @@
 
 export default function useLocalStorage() {
   function addToStorage(key, value) {
-     localStorage.setItem(key, JSON.stringify(value))
-  } 
-  return { addToStorage }
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+  return { addToStorage };
 }

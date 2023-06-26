@@ -1,18 +1,18 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from "vue";
 
 defineProps({
   title: String,
   year: String
-})
+});
 
-defineEmits(['update:title', 'update:year', 'search'])
+defineEmits(["update:title", "update:year", "search"]);
 
-const input = ref(null)
+const input = ref(null);
 
 onMounted(() => {
-  input.value.focus()
-})
+  input.value.focus();
+});
 </script>
 
 <template>

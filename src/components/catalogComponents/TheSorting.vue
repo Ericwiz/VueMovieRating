@@ -1,6 +1,6 @@
 <script setup>
-defineProps(['sortValue'])
-defineEmits(['update:sortValue'])
+defineProps(["sortValue"]);
+defineEmits(["update:sortValue"]);
 </script>
 
 <template>

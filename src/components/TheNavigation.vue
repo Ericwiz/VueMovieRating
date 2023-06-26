@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import { Icon } from '@iconify/vue'
+import { ref } from "vue";
+import { RouterLink } from "vue-router";
+import { Icon } from "@iconify/vue";
 
-const showMobileMenu = ref(true)
+const showMobileMenu = ref(true);
 </script>
 
 <template>
@@ -26,10 +26,6 @@ const showMobileMenu = ref(true)
         <RouterLink to="/catalog" class="flex items-center space-x-2 text-gray-400">
           <Icon icon="iconamoon:search-fill" class="h-4 w-4 2xl:h-10 2xl:w-10" />
           <span class="">Search</span>
-        </RouterLink>
-        <RouterLink to="/my-movie-lists" class="flex items-center space-x-2 text-gray-400">
-          <Icon icon="streamline:entertainment-play-list-1-screen-television-display-player-movies-movie-tv-media-players-video" />
-          <span>Custom movies</span>
         </RouterLink>
       </div>
 

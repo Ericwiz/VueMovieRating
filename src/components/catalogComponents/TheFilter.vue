@@ -24,15 +24,15 @@ defineProps({
     type: Boolean,
     default: false
   }
-})
+});
 defineEmits([
-  'update:drama',
-  'update:adventure',
-  'update:action',
-  'update:romance',
-  'update:love',
-  'update:comedy'
-])
+  "update:drama",
+  "update:adventure",
+  "update:action",
+  "update:romance",
+  "update:love",
+  "update:comedy"
+]);
 </script>
 
 <template>

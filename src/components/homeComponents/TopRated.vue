@@ -1,20 +1,20 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted } from "vue";
 
-import { Icon } from '@iconify/vue'
+import { Icon } from "@iconify/vue";
 
-import useMovie from '../../composables/useMovie'
+import useMovie from "../../composables/useMovie";
 
-const { movies, fetchMovies } = useMovie()
+const { movies, fetchMovies } = useMovie();
 
 onMounted(() => {
-  fetchMovies('Happiness').then((response) => {
+  fetchMovies("Happiness").then((response) => {
     //grab all the movies returned by the API when all promise resolves and assign it to the movies variable
-    const originalMovies = response.map((movies) => movies.data)
-    movies.value = originalMovies
-    return movies.value
-  })
-})
+    const originalMovies = response.map((movies) => movies.data);
+    movies.value = originalMovies;
+    return movies.value;
+  });
+});
 </script>
 
 <template>

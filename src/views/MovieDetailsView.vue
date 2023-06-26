@@ -12,7 +12,9 @@
         />
       </div>
       <div class="flex flex-col w-full space-y-2 2xl:space-y-4">
-        <h1 class="text-lg sm:text-2xl -ml-6 md:-ml-0 pt-2 md:pt-0 md:text-3xl 2xl:text-4xl text-white">
+        <h1
+          class="text-lg sm:text-2xl -ml-6 md:-ml-0 pt-2 md:pt-0 md:text-3xl 2xl:text-4xl text-white"
+        >
           {{ movie.Title }}
         </h1>
         <p class="font-normal -ml-6 md:-ml-0 2xl:text-2xl pt-5">
@@ -58,32 +60,32 @@
 </template>
 
 <script setup>
-import axios from 'axios'
-import { onMounted, ref } from 'vue'
-import { Icon } from '@iconify/vue'
-import FeedBack from '../components/FeedBacks/FeedBack.vue'
-const apikey = import.meta.env.VITE_API_KEY
-const movie = ref(null)
+import axios from "axios";
+import { onMounted, ref } from "vue";
+import { Icon } from "@iconify/vue";
+import FeedBack from "../components/FeedBacks/FeedBack.vue";
+const apikey = import.meta.env.VITE_API_KEY;
+const movie = ref(null);
 
 const props = defineProps({
   id: {
     type: String,
     required: true
   }
-})
+});
 
 onMounted(() => {
   axios
-    .get('https://www.omdbapi.com/', {
+    .get("https://www.omdbapi.com/", {
       params: {
         apikey,
         i: props.id,
-        plot: 'Short'
+        plot: "Short"
       }
     })
     .then((response) => {
-      movie.value = response.data
+      movie.value = response.data;
     })
-    .catch((err) => console.log(err))
-})
+    .catch((err) => console.log(err));
+});
 </script>

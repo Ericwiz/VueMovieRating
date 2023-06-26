@@ -1,17 +1,17 @@
 <script setup>
-import { ref } from 'vue'
-import NewRelease from './movieTypesComponents/NewRelease.vue'
-import TypeMovies from './movieTypesComponents/TypeMovies.vue'
-import TypeSeries from './movieTypesComponents/TypeSeries.vue'
-import TypeEpisodes from './movieTypesComponents/TypeEpisodes.vue'
+import { ref } from "vue";
+import NewRelease from "./movieTypesComponents/NewRelease.vue";
+import TypeMovies from "./movieTypesComponents/TypeMovies.vue";
+import TypeSeries from "./movieTypesComponents/TypeSeries.vue";
+import TypeEpisodes from "./movieTypesComponents/TypeEpisodes.vue";
 
-const activeComponent = ref('latest')
+const activeComponent = ref("latest");
 const components = {
   latest: NewRelease,
   movies: TypeMovies,
   series: TypeSeries,
   episodes: TypeEpisodes
-}
+};
 </script>
 <template>
   <div class="bg-[#191517] border-t-2 border-t-pink-800">

@@ -1,22 +1,22 @@
 <script setup>
-import { computed, onBeforeMount } from 'vue'
-import useMovie from '../../../composables/useMovie'
-import { Icon } from '@iconify/vue'
+import { computed, onBeforeMount } from "vue";
+import useMovie from "../../../composables/useMovie";
+import { Icon } from "@iconify/vue";
 
-const { movies, fetchMovies } = useMovie()
+const { movies, fetchMovies } = useMovie();
 
 onBeforeMount(() => {
-  fetchMovies('love', '2023').then((response) => {
+  fetchMovies("love", "2023").then((response) => {
     //grab all the movies returned by the API when all promise resolves and assign it to the movies variable
-    const originalMovies = response.map((movies) => movies.data)
-    movies.value = originalMovies
-    return movies.value
-  })
-})
+    const originalMovies = response.map((movies) => movies.data);
+    movies.value = originalMovies;
+    return movies.value;
+  });
+});
 
 const latestMovies = computed(() => {
-  return movies.value.slice(4, 10)
-})
+  return movies.value.slice(4, 10);
+});
 </script>
 
 <template>

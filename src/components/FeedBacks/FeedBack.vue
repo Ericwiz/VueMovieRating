@@ -1,5 +1,5 @@
 <script setup>
-import MovieReview from './MovieReview.vue'
+import MovieReview from "./MovieReview.vue";
 </script>
 
 <template>

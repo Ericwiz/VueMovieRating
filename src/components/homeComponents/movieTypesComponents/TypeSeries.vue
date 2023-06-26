@@ -1,19 +1,19 @@
 <script setup>
-import { Icon } from '@iconify/vue'
+import { Icon } from "@iconify/vue";
 
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref } from "vue";
 
-import useMovie from '../../../composables/useMovie'
+import useMovie from "../../../composables/useMovie";
 
-const { getFilmTypes } = useMovie()
+const { getFilmTypes } = useMovie();
 
-const movies = ref([])
+const movies = ref([]);
 
 onBeforeMount(() => {
-  getFilmTypes('sweet', 'series')
+  getFilmTypes("sweet", "series")
     .then((response) => (movies.value = response.Search))
-    .catch((err) => alert(err))
-})
+    .catch((err) => alert(err));
+});
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
-import ReviewCard from './ReviewCard.vue'
-import MovieRecommendation from './MoviewRecommendation.vue'
+import ReviewCard from "./ReviewCard.vue";
+import MovieRecommendation from "./MoviewRecommendation.vue";
 </script>
 
 <template>

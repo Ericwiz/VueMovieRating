@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, watchEffect } from "vue";
 
 import SearchBar from "./SearchBar.vue";
 
@@ -13,57 +13,59 @@ import useMovie from "../../composables/useMovie";
 
 const { fetchMovies } = useMovie();
 
-const page = ref(1);
+const page = ref(1); // Page number for pagination
 
-const year = ref("");
+const year = ref(""); // Year value for movies search
 
-const title = ref("love");
+const title = ref("love"); // Title value for movies search
 
-const genre = ref("");
+const drama = ref(false); // genre checkbox value for drama
 
-const drama = ref(false);
+const adventure = ref(false); // genre checkbox value for adventure
 
-const adventure = ref(false);
+const action = ref(false); // genre checkbox value for adventure
 
-const action = ref(false);
+const romance = ref(false); // genre checkbox value for romance
 
-const romance = ref(false);
+const love = ref(false); // genre checkbox value for love
 
-const love = ref(false);
+const comedy = ref(false); // genre checkbox value for comedy
 
-const comedy = ref(false);
+const sortValue = ref(""); // Sorting value for movies
 
-const sortValue = ref("");
+let triggerWatch = ref(0); // Trigger value for watch function
 
-let triggerWatch = ref(0);
+const movies = ref(null);  // Array to hold all movies return by the api
 
-const movies = ref(null);
-
-let originalMovies = [];
+let originalMovies = [];  // Stores the original array of movies fetched from the API
 
 function getMovies() {
   return fetchMovies(title.value, year.value, page.value).then((res) => {
-    originalMovies = res.map((movies) => movies.data);
-    movies.value = originalMovies;
-    console.log("movies", movies.value);
+    originalMovies = res.map((movies) => movies.data); // Assigns the fetched movies to originalMovies
+    movies.value = originalMovies; // Updates the movies array with the originalMovies
     return movies;
   });
 }
 
+// Perform initial movie fetch on component mount
 onMounted(() => {
   getMovies();
 });
 
-watch(page, () => {
+// Re-fetch movies when the relevant dependencies change
+watchEffect( () => {
   getMovies();
-  genre.value = "";
   sortValue.value = "";
+  setTimeout(() => {
+    triggerWatch.value += 1; // use this value/variable to trigger the watch 2s after movies search, to keep the sorting and filter as it were before search.
+  }, 1000);
 });
 
+// Perform movie search
 function search() {
   getMovies();
   setTimeout(() => {
-    triggerWatch.value += 1;
+    triggerWatch.value += 1; // use this value/variable to trigger the watch 2s after movies search, to keep the sorting and filter as it were before search.
   }, 2000);
   watch([drama, adventure, comedy, love, action, romance, sortValue, triggerWatch], () => {
     filterMovies();
@@ -71,12 +73,13 @@ function search() {
   });
 }
 
-watch([drama, adventure, comedy, love, action, romance, sortValue], () => {
+// Watch for changes in genre and sort value to filter and sort movies
+watch([drama, adventure, comedy, love, action, romance, sortValue, triggerWatch], () => {
   filterMovies();
   sortMovies();
 });
 
-// filter movies by genres
+// filter movies by genre
 function filterMovies() {
   movies.value = originalMovies.filter((movie) => {
     const movieGenres = movie.Genre.split(",").map((genre) => genre.trim());
@@ -106,7 +109,7 @@ function filterMovies() {
   });
 }
 
-// Sort Movies
+// Sort Movies based on sortValue variable above
 function sortMovies() {
   if (sortValue.value) {
     if (sortValue.value === "Year") {
@@ -127,7 +130,6 @@ function sortMovies() {
     } else {
       return movies.value.sort((a, b) => b.imdbRating - a.imdbRating);
     }
-    //  return movies.value = originalMovies.sort((a, b) => a.Year - b.Year);
   } else {
     return false;
   }
@@ -136,19 +138,22 @@ function sortMovies() {
 
 <template>
   <div class="h-full">
+     <!-- Header Section -->
     <div
       class="bg-pink-900 bg-movie_bg-02 bg-blend-multiply w-full h-[300px] bg-cover bg-center pt-16 px-4 sm:px-8 md:px-16"
     >
       <h1 class="text-2xl xs:text-3xl 2xl:text-4xl text-white py-16 2xl:py-20">Movie Catalog</h1>
     </div>
-
+    <!-- Search and Filter Section -->
     <div class="py-8 px-4 sm:px-8 md:px-16 bg-[#191517] drop-shadow-2xl">
       <div class="flex flex-col space-y-4 lg:flex-row lg:justify-between lg:space-y-0">
         <div class="">
+          <!-- Search Bar Component -->
           <SearchBar v-model:title="title" v-model:year="year" @search="search" />
         </div>
 
         <div class="flex space-x-4">
+          <!-- Filter Component -->
           <TheFilter
             v-model:drama="drama"
             v-model:adventure="adventure"
@@ -157,11 +162,13 @@ function sortMovies() {
             v-model:love="love"
             v-model:comedy="comedy"
           />
+           <!-- Sorting Component -->
           <TheSorting v-model:sortValue="sortValue" />
         </div>
       </div>
     </div>
 
+    <!-- Movies Display Section -->
     <div
       v-if="movies"
       class="grid gap-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-12 xl:gap-12 text-white bg-[#131212] px-4 sm:px-8 md:px-16 py-8"
@@ -211,8 +218,8 @@ function sortMovies() {
           v-if="page > 1"
           @click="page -= 1"
         >
+        <Icon icon="ooui:next-rtl" />
           <span>prev page</span>
-          <Icon icon="ooui:next-rtl" />
         </button>
       </RouterLink>
       <RouterLink :to="{ name: 'catalog', query: { page: page } }">

@@ -9,7 +9,7 @@ const router = createRouter({
       path: "/catalog",
       name: "catalog",
       component: () => import("../views/CatalogView.vue"),
-      props: (routes) => ({ page: routes.query.page })
+      props: (route) => ({ page: parseInt(route.query.page) } || 1)
     },
 
     {

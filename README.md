@@ -5,6 +5,7 @@ This is a movie site application built with Vue 3, Tailwind CSS, and the OMDB AP
 ## Table of Contents
 
 - [Live Site](#live-site)
+- [Screenshots](#screenshots)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
@@ -16,6 +17,12 @@ This is a movie site application built with Vue 3, Tailwind CSS, and the OMDB AP
 ## Live Site
 
 [VueMovies App](https://kings-vue-movies.netlify.app/)
+
+## Screenshots
+
+![VueMovies App Home Page](./public/vueMovies4.jpeg)
+![VueMovies App Catalog Page](./public/vueMovies3.jpeg)
+![VueMovies App Movie Details Page](./public/vueMovies1.jpeg)
 
 ## Installation
 
@@ -34,6 +41,7 @@ This is a movie site application built with Vue 3, Tailwind CSS, and the OMDB AP
 
 The movie site application offers the following features:
 
+- **Basic App**: A basic app with different sections on the hompage.
 - **Catalog Section**: Displays a list of movies from the OMDB API.
 - **Search Functionality**: Allows users to search for movies by title and release year.
 - **Sorting Options**: Provides sorting options to arrange movies by year, title, and rating.

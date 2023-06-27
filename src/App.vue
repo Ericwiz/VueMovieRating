@@ -1,4 +1,5 @@
 <script setup>
+import TheFooter from "./components/TheFooter.vue";
 import TheNavigation from "./components/TheNavigation.vue";
 </script>
 
@@ -9,6 +10,10 @@ import TheNavigation from "./components/TheNavigation.vue";
   <main class="w-full overflow-x-hidden">
     <RouterView />
   </main>
+
+  <footer>
+    <TheFooter />
+  </footer>
 </template>
 
 <style scoped></style>

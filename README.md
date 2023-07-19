@@ -55,6 +55,7 @@ The following features are planned for future implementation and improvement:
 
 - **Movie Recommendation**: Provide personalized movie recommendations based on user preferences and viewing history.
 - **Custom Movie Lists**: Allow users to create and manage their own custom movie lists, such as favorites or watchlists.
+- Improve pagination
 
 
 ## Technologies Used
